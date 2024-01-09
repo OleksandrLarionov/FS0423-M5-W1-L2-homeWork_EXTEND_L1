@@ -1,12 +1,23 @@
 package larionov.menu;
 
 import larionov.menu.entities.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
+@PropertySource("application.properties")
 public class BeansConfiguration {
     //    *********************************PIZZE*********************************
+
+    @Value("${prezzo.coperto}")
+    double coperto;
+
+    @Bean
+    Double getCoperto(){
+        return coperto;
+    }
     @Bean
     Pizza napoli() {
         Pizza napoli = new Pizza("Napoli", 12.50, 1500);
@@ -91,35 +102,39 @@ public class BeansConfiguration {
     }
 
     @Bean
-    Condimenti salame (){
-        return new Condimenti("salame",0.99,86);
+    Condimenti salame() {
+        return new Condimenti("salame", 0.99, 86);
     }
 
 //    **************************************TAVOLI*************************************
 
     @Bean
-    Tavolo tavoloSociale(){
-        return new Tavolo(0,12);
-    }
-    @Bean
-    Tavolo tavoloNumeroUno(){
-        return new Tavolo(1,4);
-    }
-    @Bean
-    Tavolo tavoloNumeroDue(){
-        return new Tavolo(2,4);
-    }
-    @Bean
-    Tavolo tavoloNumeroTre(){
-        return new Tavolo(3,2);
-    }
-    @Bean
-    Tavolo tavoloNumeroQuattro(){
-        return new Tavolo(4,2);
+    Tavolo tavoloSociale() {
+        return new Tavolo(0, 12);
     }
 
     @Bean
-    Sala getTavoliDisponibiliNellaSala(){
+    Tavolo tavoloNumeroUno() {
+        return new Tavolo(1, 4);
+    }
+
+    @Bean
+    Tavolo tavoloNumeroDue() {
+        return new Tavolo(2, 4);
+    }
+
+    @Bean
+    Tavolo tavoloNumeroTre() {
+        return new Tavolo(3, 2);
+    }
+
+    @Bean
+    Tavolo tavoloNumeroQuattro() {
+        return new Tavolo(4, 2);
+    }
+
+    @Bean
+    Sala getTavoliDisponibiliNellaSala() {
         Sala sala = new Sala();
         sala.aggiungiIlTavoloAllaSala(tavoloSociale());
         sala.aggiungiIlTavoloAllaSala(tavoloNumeroUno());
@@ -129,6 +144,7 @@ public class BeansConfiguration {
 
         return sala;
     }
+
     @Bean
     Menu getMenu() {
         Menu menu = new Menu();

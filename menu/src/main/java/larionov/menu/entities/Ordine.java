@@ -1,9 +1,10 @@
 package larionov.menu.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Ordine {
     }
 
     public void totaleDellOrdine(){
-        Double totale = menuItems.stream().mapToDouble(MenuItem::getPrezzo).sum();
+        Double totale = menuItems.stream().mapToDouble(MenuItem::getPrezzo).sum()  * numeroDiCoperti;
         System.out.println("Totale dell'ordine: " + totale);
     }
 }
