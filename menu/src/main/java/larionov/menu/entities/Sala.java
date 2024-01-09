@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Getter
-@Setter
+@Data
 public class Sala {
     private List<Tavolo> tavoliDisponibili;
     public Sala() {
@@ -18,11 +16,5 @@ public class Sala {
         this.tavoliDisponibili.add(tavolo);
     }
 
-    @Override
-    public String toString() {
-        return "Sala{" +
-                 (tavoliDisponibili.stream().map(Tavolo::getStatoDelTavolo)).forEach(Tavolo tavolo == STATO.LIBERO);  +
-                '}';
-    }
 }
 

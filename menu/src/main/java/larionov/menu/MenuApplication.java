@@ -21,8 +21,15 @@ public class MenuApplication {
         Tavolo tavoloSociale = (Tavolo) ctx.getBean("tavoloSociale") ;
         tavoloSociale.setNumeroDiCopertiEffettivi(3);
         tavoloSociale.setStatoDelTavolo(STATO.OCCUPATO);
-        System.out.println(tavoliDisponibiliAlLocale);
+        Ordine nuovoOrdine = new Ordine(tavoloSociale);
+        nuovoOrdine.setNumeroDiCoperti(3);
+        nuovoOrdine.aggiunguAllOrdine(ctx.getBean("napoli", Pizza.class));
+        nuovoOrdine.aggiunguAllOrdine(ctx.getBean("fanta", Bevande.class));
+        nuovoOrdine.aggiunguAllOrdine(ctx.getBean("prosciutto",Condimenti.class));
 
+        System.out.println(tavoliDisponibiliAlLocale);
+        System.out.println(nuovoOrdine);
+        nuovoOrdine.totaleDellOrdine();
 
 /*        int choice;
         do {

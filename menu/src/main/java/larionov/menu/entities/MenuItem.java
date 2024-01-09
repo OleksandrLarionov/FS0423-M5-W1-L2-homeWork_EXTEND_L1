@@ -1,8 +1,14 @@
 package larionov.menu.entities;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class MenuItem {
     private String nome;
     private double prezzo;
