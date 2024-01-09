@@ -30,6 +30,7 @@ public class MenuApplication {
         nuovoOrdine.aggiunguAllOrdine(ctx.getBean("napoli", Pizza.class));
         nuovoOrdine.aggiunguAllOrdine(ctx.getBean("fanta", Bevande.class));
         nuovoOrdine.aggiunguAllOrdine(ctx.getBean("prosciutto",Condimenti.class));
+        nuovoOrdine.setCoperto(ctx.getBean("getCoperto", double.class));
 
         System.out.println(tavoliDisponibiliAlLocale);
         System.out.println(nuovoOrdine);

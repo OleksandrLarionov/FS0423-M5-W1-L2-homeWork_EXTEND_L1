@@ -14,12 +14,15 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
+@PropertySource("application.properties")
 public class Ordine {
     private Tavolo tavolo;
     private STATO_ORDINE statoDellOrdinazione;
     private LocalDate dataAcquisizioneDellOrdine;
     private int numeroDiCoperti;
     private List<MenuItem> menuItems;
+//    @Value("${prezzo.coperto}")
+    private double coperto;
 
     public Ordine(Tavolo tavolo) {
         this.tavolo = tavolo;
@@ -34,7 +37,7 @@ public class Ordine {
     }
 
     public void totaleDellOrdine(){
-        Double totale = menuItems.stream().mapToDouble(MenuItem::getPrezzo).sum()  * numeroDiCoperti;
+        Double totale = menuItems.stream().mapToDouble(MenuItem::getPrezzo).sum() + coperto * numeroDiCoperti;
         System.out.println("Totale dell'ordine: " + totale);
     }
 }
