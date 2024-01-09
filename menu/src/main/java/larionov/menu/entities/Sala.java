@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@ToString
 @Getter
 @Setter
 public class Sala {
@@ -18,4 +17,12 @@ public class Sala {
     public void aggiungiIlTavoloAllaSala(Tavolo tavolo) {
         this.tavoliDisponibili.add(tavolo);
     }
+
+    @Override
+    public String toString() {
+        return "Sala{" +
+                 (tavoliDisponibili.stream().map(Tavolo::getStatoDelTavolo)).forEach(Tavolo tavolo == STATO.LIBERO);  +
+                '}';
+    }
 }
+
