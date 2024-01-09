@@ -23,7 +23,8 @@ public class MyRunner implements CommandLineRunner {
         mostraMenu();
         prontoPerOrdinare();
         Ordine ordine = ordineAlTavolo(sceltaDelTavolo(choice), numeroCoperti);
-        ordine.setCoperto(numeroCoperti);
+        System.out.println("Avete Ordinato: " +  ordine.getMenuItems() );
+
         ordine.totaleDellOrdine();
 
 
@@ -178,8 +179,11 @@ public class MyRunner implements CommandLineRunner {
     }
 
     private Ordine ordineAlTavolo(Tavolo tavolo, int coperti) {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
         Ordine nuovoOrdine = new Ordine(tavolo);
-        for(int i=0; i<coperti; i++){
+        nuovoOrdine.setNumeroDiCoperti(coperti);
+        nuovoOrdine.setCoperto(ctx.getBean("getCoperto", double.class));
+        for(int i=0; i < coperti; i++){
             System.out.println("Che pizza vuole?");
             int sceltaPizze = getUserChoise();
             nuovoOrdine.aggiunguAllOrdine(ordinePizze(sceltaPizze));
