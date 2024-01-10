@@ -31,6 +31,10 @@ public class Pizza extends MenuItem {
         System.out.println("Il totale delle calorie di questo piatto è: " + totaleCalorie + " Kcal");
     }
 
+    public double calcoloCalorieBackDouble(){
+        return getCalorie() + condimenti.stream().mapToDouble(Condimenti::getCalorie).sum();
+    }
+
     public void calcoloPrezzoFinaleDelProdotto() {
         double prezzoTotaleDelPiatto = getPrezzo() + condimenti.stream().mapToDouble(Condimenti::getPrezzo).sum();
         System.out.println("In totale questo piatto ha un valore di: " + prezzoTotaleDelPiatto + " Euro");
