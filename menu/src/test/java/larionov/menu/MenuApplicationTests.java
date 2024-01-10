@@ -65,4 +65,14 @@ class MenuApplicationTests {
 		assertTrue(pizza.getCondimenti().isEmpty());
 	}
 
+	@ParameterizedTest
+	@CsvSource({"Mortazza,8.5,1500","Begganti,9,1200"})
+	public void testDeltaPrezzo(String nome, double prezzo, int calorie){
+		Pizza pizza = new Pizza(nome, prezzo, calorie);
+		assertNotNull(pizza);
+		assertEquals(nome, pizza.getNome());
+		assertEquals(prezzo, 5, 5);
+		assertEquals(calorie,pizza.getCalorie());
+	}
+
 }
