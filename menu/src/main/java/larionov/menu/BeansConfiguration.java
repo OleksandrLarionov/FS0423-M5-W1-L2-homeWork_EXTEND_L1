@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @PropertySource("application.properties")
 public class BeansConfiguration {
@@ -15,9 +18,10 @@ public class BeansConfiguration {
     double coperto;
 
     @Bean
-    Double getCoperto(){
+    Double getCoperto() {
         return coperto;
     }
+
     @Bean
     Pizza napoli() {
         Pizza napoli = new Pizza("Napoli", 12.50, 1500);
@@ -145,28 +149,61 @@ public class BeansConfiguration {
         return sala;
     }
 
-    @Bean
-    Menu getMenu() {
-        Menu menu = new Menu();
-        menu.aggiungiPizzaAlMenu(napoli());
-        menu.aggiungiPizzaAlMenu(margherita());
-        menu.aggiungiPizzaAlMenu(pizzaAlSalame());
+    /* @Bean
+     Menu getMenu() {
+         Menu menu = new Menu();
+         menu.aggiungiPizzaAlMenu(napoli());
+         menu.aggiungiPizzaAlMenu(margherita());
+         menu.aggiungiPizzaAlMenu(pizzaAlSalame());
 
-        menu.aggiungiBevandaAlMenu(fanta());
-        menu.aggiungiBevandaAlMenu(cocacola());
-        menu.aggiungiBevandaAlMenu(lemonade());
-        menu.aggiungiBevandaAlMenu(water());
-        menu.aggiungiBevandaAlMenu(wine());
+         menu.aggiungiBevandaAlMenu(fanta());
+         menu.aggiungiBevandaAlMenu(cocacola());
+         menu.aggiungiBevandaAlMenu(lemonade());
+         menu.aggiungiBevandaAlMenu(water());
+         menu.aggiungiBevandaAlMenu(wine());
 
-        menu.aggiungiCondimentoAlMenu(basilico());
-        menu.aggiungiCondimentoAlMenu(alici());
-        menu.aggiungiCondimentoAlMenu(salame());
-        menu.aggiungiCondimentoAlMenu(prosciutto());
-        menu.aggiungiCondimentoAlMenu(cipolle());
+         menu.aggiungiCondimentoAlMenu(basilico());
+         menu.aggiungiCondimentoAlMenu(alici());
+         menu.aggiungiCondimentoAlMenu(salame());
+         menu.aggiungiCondimentoAlMenu(prosciutto());
+         menu.aggiungiCondimentoAlMenu(cipolle());
 
 
-        return menu;
+         return menu;
+     }*/
+    @Bean("pizze")
+    List<Pizza> getPizze() {
+        List<Pizza> pizzeDisponibili = new ArrayList<>();
+        pizzeDisponibili.add(margherita());
+        pizzeDisponibili.add(napoli());
+        pizzeDisponibili.add(pizzaAlSalame());
+        return pizzeDisponibili;
     }
 
+    @Bean("bevande")
+    List<Bevande> getBevande(){
+        List<Bevande> bevandeDisponibili = new ArrayList<>();
+        bevandeDisponibili.add(wine());
+        bevandeDisponibili.add(water());
+        bevandeDisponibili.add(lemonade());
+        bevandeDisponibili.add(cocacola());
+        bevandeDisponibili.add(fanta());
+        return bevandeDisponibili;
+    }
+
+    @Bean("condimenti")
+    List<Condimenti> getCondimenti(){
+        List<Condimenti> condimentiDisponibili = new ArrayList<>();
+        condimentiDisponibili.add(prosciutto());
+        condimentiDisponibili.add(basilico());
+        condimentiDisponibili.add(alici());
+        condimentiDisponibili.add(salame());
+        condimentiDisponibili.add(salsiccia());
+        condimentiDisponibili.add(formaggio());
+        condimentiDisponibili.add(cipolle());
+        condimentiDisponibili.add(funghi());
+        return condimentiDisponibili;
+
+    }
 
 }

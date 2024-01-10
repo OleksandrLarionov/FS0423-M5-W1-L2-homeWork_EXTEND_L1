@@ -14,6 +14,6 @@ public class Bevande extends MenuItem{
 
     @Override
     public String toString() {
-        return "\n" + getNome() + " " + getPrezzo() + " Euro\n";
+        return getNome() + " " + "Prezzo: " + getPrezzo() + " Euro\n";
     }
 }

@@ -20,9 +20,12 @@ public class Condimenti extends MenuItem{
         this.listaCondimentiDisponibili.add(condimento);
     }
 
+    public String getNomeCondimento() {
+        return getNome();
+    }
+
     @Override
     public String toString() {
-        return "\n" + getNome() + ": " + " Calorie: " + getCalorie() + " kal" + " Prezzo: " +  getPrezzo() + " Euro\n"
-                ;
+        return getNome() + ": " + " Calorie: " + getCalorie() + " kal. " + "Supplemento: " + getPrezzo() + " Euro\n";
     }
 }
