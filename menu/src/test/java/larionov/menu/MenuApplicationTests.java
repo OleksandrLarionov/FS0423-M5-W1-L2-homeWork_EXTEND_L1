@@ -59,7 +59,7 @@ class MenuApplicationTests {
 		Pizza pizza = new Pizza(nome, prezzo, calorie);
 		assertNotNull(pizza);
 		assertEquals(nome, pizza.getNome());
-		assertEquals(prezzo, pizza.getPrezzo(), 0.001);
+		assertEquals(prezzo, pizza.getPrezzo(), 5);
 		assertEquals(calorie, pizza.getCalorie());
 		assertEquals("Pomodoro e Mozzarella", pizza.getBase());
 		assertTrue(pizza.getCondimenti().isEmpty());

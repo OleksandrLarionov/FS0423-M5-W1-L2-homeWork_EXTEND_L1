@@ -3,17 +3,19 @@ package larionov.menu.entities;
 import larionov.menu.MenuApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-//@Component
+import static larionov.menu.entities.Menu.*;
+
+@Component
 public class MyRunner implements CommandLineRunner {
+    public static AnnotationConfigApplicationContext ctx;
 
     @Override
     public void run(String... args) throws Exception {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
+        ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
 
         System.out.println("Benvenuto Alla Pizzeria Grande Piramide Di Egitto");
         int numeroCoperti = coperti();
@@ -23,7 +25,7 @@ public class MyRunner implements CommandLineRunner {
         mostraMenu();
         prontoPerOrdinare();
         Ordine ordine = ordineAlTavolo(sceltaDelTavolo(choice), numeroCoperti);
-        System.out.println("Avete Ordinato: " +  ordine.getMenuItems() );
+        System.out.println("Avete Ordinato: " + ordine.getMenuItems());
 
         ordine.totaleDellOrdine();
 
@@ -43,25 +45,12 @@ public class MyRunner implements CommandLineRunner {
         System.out.println("4. Tavolo numero 4");
     }
 
-    private int coperti(){
+    private int coperti() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("In Qianti siete?");
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private void pizze() {
-        System.out.println("1. Napoli");
-        System.out.println("2. Margherita");
-        System.out.println("3. Pizza Al Salame");
-    }
-
-    private void bevande() {
-        System.out.println("1. CocaCola");
-        System.out.println("2. Fanta");
-        System.out.println("3. Linota");
-        System.out.println("4. Acqua");
-        System.out.println("5. Vino");
-    }
 
     private int getUserChoise() {
         Scanner scanner = new Scanner(System.in);
@@ -95,34 +84,28 @@ public class MyRunner implements CommandLineRunner {
     }
 
     private Tavolo assegnaIlTavolo(String nomeDelTavolo) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
-
         Tavolo tavoloAssegnato = ctx.getBean(nomeDelTavolo, Tavolo.class);
         tavoloAssegnato.setStatoDelTavolo(STATO.OCCUPATO);
         return tavoloAssegnato;
     }
 
     private void mostraMenu() {
-        System.out.println("********************************LE NOSTRE PIZZE*********************************");
-        pizze();
-        System.out.println("********************************LE NOSTRE BEVANDE*********************************");
-        bevande();
+        tutteLePizzeDisponibili();
+        tutteLeBevandeDisponibili();
+        tuttiCondimentiDisponibili();
     }
 
     private Bevande scegliLaBevanda(String bevanda) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
         Bevande bevandaScelta = ctx.getBean(bevanda, Bevande.class);
         return bevandaScelta;
     }
 
     private Pizza scegliLaPizza(String pizza) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
         Pizza pizzaScelta = ctx.getBean(pizza, Pizza.class);
         return pizzaScelta;
     }
 
     private void scegliIlCondimento(String condimento) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
         Condimenti COndimentoScelto = ctx.getBean(condimento, Condimenti.class);
     }
 
@@ -131,7 +114,7 @@ public class MyRunner implements CommandLineRunner {
 
         System.out.println("Pronti?");
         if (scanner.nextLine().equalsIgnoreCase("si")) System.out.println("Cosa prendete?");
-        else do{
+        else do {
             System.out.println("E ora!?");
         } while (!scanner.nextLine().equalsIgnoreCase("si"));
     }
@@ -179,11 +162,10 @@ public class MyRunner implements CommandLineRunner {
     }
 
     private Ordine ordineAlTavolo(Tavolo tavolo, int coperti) {
-        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MenuApplication.class);
         Ordine nuovoOrdine = new Ordine(tavolo);
         nuovoOrdine.setNumeroDiCoperti(coperti);
         nuovoOrdine.setCoperto(ctx.getBean("getCoperto", double.class));
-        for(int i=0; i < coperti; i++){
+        for (int i = 0; i < coperti; i++) {
             System.out.println("Che pizza vuole?");
             int sceltaPizze = getUserChoise();
             nuovoOrdine.aggiunguAllOrdine(ordinePizze(sceltaPizze));
